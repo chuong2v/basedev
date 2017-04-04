@@ -4,7 +4,7 @@ import config from 'config'
 import routes from './routes'
 
 let server = restify.createServer({
-  name: 'pickme',
+  name: 'basedev',
   version: '1.0.0'
 });
 

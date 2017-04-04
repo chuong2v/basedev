@@ -1,5 +1,5 @@
 {
-  "name": "pickme",
+  "name": "basedev",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "babel-node index.js --presets es2015,stage-2"
   },
-  "author": "",
+  "author": "chuong.2v@gmail.com",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
