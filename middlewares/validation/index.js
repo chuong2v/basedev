@@ -1,6 +1,7 @@
+import logger from './../../lib/log'
 import Joi from 'joi'
 
 export default (req, res, next) => {
-  console.log("Validation")
+  logger.debug("Validation")
   next()
 }

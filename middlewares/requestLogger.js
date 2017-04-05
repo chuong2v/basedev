@@ -1,4 +1,6 @@
+import logger from './../lib/log'
+
 export default (req, res, next) => {
-	console.log("Request::", req.method, req.url)
+	logger.debug("Request::", req.method, req.url)
   next()
 }
