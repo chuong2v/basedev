@@ -23,7 +23,7 @@ export default class BaseController {
   }
 
   forbidden(ex) {
-    this.response.send(401, ex)
+    this.response.send(403, ex)
   }
 
   notFound(ex) {
@@ -38,7 +38,15 @@ export default class BaseController {
     this.response.send(201, data)
   }
 
-  handleUpdated(data) {
+  handleAccepted(data) {
     this.response.send(202, data)
+  }
+
+  handleDeleted(data) {
+    this.response.send(data && 200 || 204, data)
+  }
+
+  handleUpdated(data) {
+    this.response.send(data && 200 || 204, data)
   }
 }
