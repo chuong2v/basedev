@@ -2,9 +2,9 @@ import BaseController from './BaseController'
 
 export default class UserController extends BaseController {
   fetch() {
-    this.response.send({ "name": "peter" })
+    this.ok({ "name": "peter" })
   }
   create() {
-    this.response.send({ "name": "chuong" })
+    this.ok({ "name": "chuong" })
   }
 }
