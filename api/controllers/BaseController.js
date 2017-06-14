@@ -1,5 +1,6 @@
-import logger from './../../lib/log'
 import WinstonContext from 'winston-context'
+import logger from './../../lib/log'
+import Models from './../models'
 
 export default class BaseController {
   constructor(req, res) {
@@ -8,6 +9,13 @@ export default class BaseController {
     this.log = new WinstonContext(logger, '', {
       requestId: req.requestId
     })
+    let modelName = this.constructor.name || ''
+    modelName = modelName && modelName.slice(0, modelName.indexOf('Controller'))
+    this.model = Models[modelName]
+  }
+
+  find(query, select, sort, pagination) {
+    return this.model && this.model.find(query, select)
   }
 
   serverError(ex) {
