@@ -1,10 +1,13 @@
 import logger from './../../lib/log'
+import WinstonContext from 'winston-context'
 
 export default class BaseController {
   constructor(req, res) {
     this.request = req
     this.response = res
-    this.log = logger
+    this.log = new WinstonContext(logger, '', {
+      requestId: req.requestId
+    })
   }
 
   serverError(ex) {

@@ -13,8 +13,6 @@ server.use(restify.queryParser());
 server.use(restify.bodyParser());
 server.use(...middlewares)
  
-// server.use(routes)
-
 routes(server)
  
 server.listen(config.get('port'), function () {
