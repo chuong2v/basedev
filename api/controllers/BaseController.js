@@ -1,6 +1,7 @@
 import WinstonContext from 'winston-context'
 import logger from './../../lib/log'
 import Models from './../models'
+import _ from 'lodash'
 
 export default class BaseController {
   constructor(req, res) {
@@ -12,6 +13,7 @@ export default class BaseController {
     let modelName = this.constructor.name || ''
     modelName = modelName && modelName.slice(0, modelName.indexOf('Controller'))
     this.model = Models[modelName]
+    _.extend(this, Models || {})
   }
 
   find(query, select, sort, pagination) {
