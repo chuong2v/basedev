@@ -2,6 +2,7 @@ import WinstonContext from 'winston-context'
 import logger from './../../lib/log'
 import Models from './../models'
 import _ from 'lodash'
+import Promise from 'bluebird'
 
 export default class BaseController {
   constructor(req, res) {
@@ -10,14 +11,37 @@ export default class BaseController {
     this.log = new WinstonContext(logger, '', {
       requestId: req.requestId
     })
-    let modelName = this.constructor.name || ''
-    modelName = modelName && modelName.slice(0, modelName.indexOf('Controller'))
+    this.name = this.constructor.name || ''
+    let modelName = this.name && this.name.slice(0, this.name.indexOf('Controller'))
     this.model = Models[modelName]
     _.extend(this, Models || {})
   }
 
-  find(query, select, sort, pagination) {
-    return this.model && this.model.find(query, select)
+  pagination(query = {}, select = {}, sort = {}, page = 0, size = 10) {
+    this.log.debug(`[${this.name}][pagination] - query`, JSON.stringify(query))
+    this.log.debug(`[${this.name}][pagination] - select`, JSON.stringify(select))
+    this.log.debug(`[${this.name}][pagination] - sort`, JSON.stringify(sort))
+    this.log.debug(`[${this.name}][pagination] - page`, page)
+    this.log.debug(`[${this.name}][pagination] - size`, size)
+
+    const from = page * size
+
+    return Promise.all([
+      this.model
+        .find(query, select)
+        .sort(sort)
+        .skip(from)
+        .limit(size),
+      this.model.count(query)
+    ]).spread((list, total) => {
+      return { from, size, list, total }
+    })
+  }
+
+  common() {
+    return {
+      doSomething: () => { }
+    }
   }
 
   serverError(ex) {
