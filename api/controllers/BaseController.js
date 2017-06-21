@@ -45,42 +45,42 @@ export default class BaseController {
   }
 
   serverError(ex) {
-    this.response.send(500, ex)
+    this.response.status(500).send(ex)
   }
 
   badRequest(ex) {
-    this.response.send(400, ex)
+    this.response.status(400).send(ex)
   }
 
   unauthorized(ex) {
-    this.response.send(401, ex)
+    this.response.status(401).send(ex)
   }
 
   forbidden(ex) {
-    this.response.send(403, ex)
+    this.response.status(403).send(ex)
   }
 
   notFound(ex) {
-    this.response.send(404, ex)
+    this.response.status(404).send(ex)
   }
 
   ok(data) {
-    this.response.send(200, data)
+    this.response.status(200).send(data)
   }
 
   handleCreated(data) {
-    this.response.send(201, data)
+    this.response.status(201).send(data)
   }
 
   handleAccepted(data) {
-    this.response.send(202, data)
+    this.response.status(202).send(data)
   }
 
   handleDeleted(data) {
-    this.response.send(data && 200 || 204, data)
+    this.response.status(data && 200 || 204).send(data)
   }
 
   handleUpdated(data) {
-    this.response.send(data && 200 || 204, data)
+    this.response.status(data && 200 || 204).send(data)
   }
 }
