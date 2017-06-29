@@ -15,10 +15,9 @@ const accessTokenSchema = new Schema({
 
 accessTokenSchema.options = {
   timestamps: true,
-  toObject: {
+  toJSON: {
     transform: function (doc, ret, options) {
       delete ret.__v
-      return ret
     }
   }
 }

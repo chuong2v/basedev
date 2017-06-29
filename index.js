@@ -8,7 +8,7 @@ import routes from './routes'
 bootstrap()
 
 const server = express()
-server.use(bodyParser.urlencoded())
+server.use(bodyParser.urlencoded({ extended: true }))
 server.use(bodyParser.json())
 server.use(...middlewares)
 

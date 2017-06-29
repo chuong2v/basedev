@@ -2,12 +2,11 @@ import BaseController from './BaseController'
 
 export default class UserController extends BaseController {
   fetch() {
-    console.log("herer")
-    this.pagination().then(users => {
+    this.User.pagination().then(users => {
+      users.list = users.list.map(user => {
+        return user.toJSON()
+      })
       this.ok(users)
     })
-  }
-  create() {
-    this.ok({ "name": "chuong" })
   }
 }

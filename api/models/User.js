@@ -1,6 +1,5 @@
 import mongoose from 'mongoose'
-import Promise from 'bluebird'
-mongoose.Promise = Promise
+import BaseClass from './BaseClass'
 const Schema = mongoose.Schema
 const userSchema = new Schema({
   username: {
@@ -27,17 +26,21 @@ userSchema.options = {
     transform: function (doc, ret, options) {
       delete ret.__v
       delete ret.password
-      return ret
+      ret.fullName = `${doc.firstName} ${doc.lastName}`
     }
   }
-}
-
-userSchema.methods.verifyPassword = function (password) {
-
 }
 
 userSchema.query.byUser = function (userId) {
   return this.find({ userId })
 }
+
+class UserClass extends BaseClass {
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`
+  }
+}
+
+userSchema.loadClass(UserClass);
 
 export default mongoose.model('User', userSchema)
