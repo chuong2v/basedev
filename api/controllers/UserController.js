@@ -1,11 +1,8 @@
-import BaseController from './BaseController'
+import { BaseController } from 'basedev-core'
 
 export default class UserController extends BaseController {
   fetch() {
     this.User.pagination().then(users => {
-      users.list = users.list.map(user => {
-        return user.toJSON()
-      })
       this.ok(users)
     })
   }

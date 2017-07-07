@@ -1,5 +1,5 @@
 import ApiRoutes from './../api/configs/routes'
-import Controllers from './../api/controllers'
+import { Controllers } from 'basedev-core'
 import Policies from './../api/policies'
 
 export default (server) => {
@@ -11,7 +11,8 @@ export default (server) => {
     }
 
     server[route.method](route.url, (req, res) => {
-      new Controllers[route.controller](req, res)[route.action]()
+      let ControllerClass = Controllers[route.controller];
+      new ControllerClass(req, res)[route.action]()
     })
   })
 }

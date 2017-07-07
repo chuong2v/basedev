@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import BaseClass from './BaseClass'
+import { BaseModelClass } from 'basedev-core'
 const Schema = mongoose.Schema
 const userSchema = new Schema({
   username: {
@@ -35,7 +35,7 @@ userSchema.query.byUser = function (userId) {
   return this.find({ userId })
 }
 
-class UserClass extends BaseClass {
+class UserClass extends BaseModelClass {
   get fullName() {
     return `${this.firstName} ${this.lastName}`
   }

@@ -1,6 +1,6 @@
 import WinstonContext from 'winston-context'
-import logger from './../../lib/log'
-import Models from './../models'
+import logger from './../lib/log'
+import Models from './models'
 import _ from 'lodash'
 import Promise from 'bluebird'
 
@@ -12,8 +12,9 @@ export default class BaseController {
       requestId: req.requestId
     })
     this.name = this.constructor.name || ''
-    let modelName = this.name && this.name.slice(0, this.name.indexOf('Controller'))
-    this.model = Models[modelName]
+    let modelName = this.name && this.name.slice(0, -"Controller".length)
+    this.model = this.model || Models[modelName]
+    // this.helper = this.helper || require(`${this.name}.helper`)
     _.extend(this, Models || {})
   }
 
