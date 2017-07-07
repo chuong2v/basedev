@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { BaseModelClass } from 'basedev-core'
+import { BaseModelClass } from './../../core'
 const Schema = mongoose.Schema
 const userSchema = new Schema({
   username: {

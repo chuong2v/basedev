@@ -1,5 +1,5 @@
 import ApiRoutes from './../api/configs/routes'
-import { Controllers } from 'basedev-core'
+import { Controllers } from './../core'
 import Policies from './../api/policies'
 
 export default (server) => {

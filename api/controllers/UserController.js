@@ -1,4 +1,4 @@
-import { BaseController } from 'basedev-core'
+import { BaseController } from './../../core'
 
 export default class UserController extends BaseController {
   fetch() {
