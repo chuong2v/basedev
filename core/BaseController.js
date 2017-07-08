@@ -8,28 +8,28 @@ export default class BaseController {
   constructor(req, res) {
     this.request = req
     this.response = res
-    this.log = new WinstonContext(logger, '', {
+    this.name = this.constructor.name || ''
+    this.log = new WinstonContext(logger, this.name, {
       requestId: req.requestId
     })
-    this.name = this.constructor.name || ''
     let modelName = this.name && this.name.slice(0, -"Controller".length)
     this.model = this.model || Models[modelName]
     if (!this.helper) {
       try {
         this.helper = require(`${this.name}.helper`)
       } catch (e) {
-        this.log.warn(`[${this.name}] - has no controller helper`, e.toString())
+        this.log.warn(`constructor - has no controller helper`)
       }
     }
     _.extend(this, Models || {})
   }
 
   pagination(query = {}, select = {}, sort = {}, page = 0, size = 10) {
-    this.log.debug(`[${this.name}][pagination] - query`, JSON.stringify(query))
-    this.log.debug(`[${this.name}][pagination] - select`, JSON.stringify(select))
-    this.log.debug(`[${this.name}][pagination] - sort`, JSON.stringify(sort))
-    this.log.debug(`[${this.name}][pagination] - page`, page)
-    this.log.debug(`[${this.name}][pagination] - size`, size)
+    this.log.debug(`pagination - query`, JSON.stringify(query))
+    this.log.debug(`pagination - select`, JSON.stringify(select))
+    this.log.debug(`pagination - sort`, JSON.stringify(sort))
+    this.log.debug(`pagination - page`, page)
+    this.log.debug(`pagination - size`, size)
 
     const from = page * size
 
