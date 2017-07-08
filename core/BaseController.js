@@ -14,7 +14,13 @@ export default class BaseController {
     this.name = this.constructor.name || ''
     let modelName = this.name && this.name.slice(0, -"Controller".length)
     this.model = this.model || Models[modelName]
-    // this.helper = this.helper || require(`${this.name}.helper`)
+    if (!this.helper) {
+      try {
+        this.helper = require(`${this.name}.helper`)
+      } catch (e) {
+        this.log.warn(`[${this.name}] - has no controller helper`, e.toString())
+      }
+    }
     _.extend(this, Models || {})
   }
 

@@ -1,6 +1,6 @@
 import Promise from 'bluebird'
 
-class BaseClass {
+class BaseModelClass {
   static pagination(query = {}, page = 1, size = 10, select = {}, sort = {}) {
     let from = (page - 1) * size
     return Promise.all([
@@ -10,4 +10,4 @@ class BaseClass {
   }
 }
 
-export default BaseClass
+export default BaseModelClass
