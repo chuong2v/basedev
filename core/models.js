@@ -6,7 +6,7 @@ let models = {}
 let fileNames = fs.readdirSync(modelPath)
 fileNames.forEach(fileName => {
   let filePath = path.resolve(modelPath, fileName)
-  models[fileName.slice(0, -3)] = require(filePath).default
+  models[fileName.slice(0, -".js".length)] = require(filePath).default
 })
 
 export default models

@@ -6,7 +6,7 @@ let controllers = {}
 let fileNames = fs.readdirSync(controllerPath)
 fileNames.forEach(fileName => {
   let filePath = path.resolve(controllerPath, fileName)
-  controllers[fileName.slice(0, -3)] = require(filePath).default
+  controllers[fileName.slice(0, -".js".length)] = require(filePath).default
 })
 
 export default controllers

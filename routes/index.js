@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import ApiRoutes from './../api/configs/routes'
 import { Controllers } from './../core'
 import Policies from './../api/policies'
@@ -12,7 +13,18 @@ export default (server) => {
 
     server[route.method](route.url, (req, res) => {
       let ControllerClass = Controllers[route.controller];
-      new ControllerClass(req, res)[route.action]()
+      if (ControllerClass) {
+        let controllerObject = new ControllerClass(req, res);
+        let action = controllerObject[route.action];
+ console.log("action ", action);
+        if (_.isFunction(action)) {
+          action.call(controllerObject);
+        } else {
+          res.send({ error: "Action not found." })
+        }
+      } else {
+        res.send({ error: "Action not found." })
+      }
     })
   })
 }
