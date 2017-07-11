@@ -1,7 +1,6 @@
 import _ from 'lodash'
 import ApiRoutes from './../api/configs/routes'
-import { Controllers } from './../core'
-import Policies from './../api/policies'
+import { Controllers, Policies } from './../core'
 
 export default (server) => {
   ApiRoutes.forEach(route => {
@@ -16,7 +15,6 @@ export default (server) => {
       if (ControllerClass) {
         let controllerObject = new ControllerClass(req, res);
         let action = controllerObject[route.action];
- console.log("action ", action);
         if (_.isFunction(action)) {
           action.call(controllerObject);
         } else {
