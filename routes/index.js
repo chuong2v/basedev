@@ -1,13 +1,13 @@
 import _ from 'lodash'
-import ApiRoutes from './../api/configs/routes'
+import { Routes } from './../core'
 import { Controllers, Policies } from './../core'
 
 export default (server) => {
-  ApiRoutes.forEach(route => {
+  Routes.forEach(route => {
     if (Array.isArray(route.policies) && route.policies.length > 0) {
       route.policies.forEach(policy => server.use(Policies[policy]))
-    } else if (Policies.all) {
-      server.use(Policies[Policies.all])
+    } else if (Policies.default) {
+      server.use(Policies[Policies.default])
     }
 
     server[route.method](route.url, (req, res) => {

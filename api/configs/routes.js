@@ -1,16 +1,5 @@
+// "method /api/url NameController action policies"
 export default [
-  {
-    url: "/users",
-    method: "get",
-    controller: "UserController",
-    action: "fetch",
-    policies: ['isUser']
-  },
-  {
-    url: "/users",
-    method: "post",
-    controller: "UserController",
-    action: "create",
-    policies: ['isUser']
-  },
+  "get /users UserController fetch isUser",
+  "post /users UserController create isUser",
 ]
