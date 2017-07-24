@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import Controllers from './controllers'
 import Policies from './policies'
+import Validation from './validation'
 import routes from './../api/routes'
 
 let transformedRoutes = routes.map(route => {
@@ -20,6 +21,10 @@ export default (server) => {
       route.policies.forEach(policy => server.use(Policies[policy]))
     } else if (Policies.default) {
       server.use(Policies[Policies.default])
+    }
+
+    if (route.validate) {
+      server.use(Validation[route.validate])
     }
 
     server[route.method](route.url, (req, res) => {
