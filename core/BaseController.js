@@ -24,14 +24,14 @@ export default class BaseController {
     _.extend(this, Models || {})
   }
 
-  pagination(query = {}, select = {}, sort = {}, page = 0, size = 10) {
-    this.log.debug(`pagination - query`, JSON.stringify(query))
-    this.log.debug(`pagination - select`, JSON.stringify(select))
-    this.log.debug(`pagination - sort`, JSON.stringify(sort))
-    this.log.debug(`pagination - page`, page)
-    this.log.debug(`pagination - size`, size)
+  paginate(query = {}, select = {}, sort = {}, page = 0, size = 10) {
+    this.log.debug(`paginate - query`, JSON.stringify(query))
+    this.log.debug(`paginate - select`, JSON.stringify(select))
+    this.log.debug(`paginate - sort`, JSON.stringify(sort))
+    this.log.debug(`paginate - page`, page)
+    this.log.debug(`paginate - size`, size)
 
-    const from = page * size
+    const from = parseInt(page) * parseInt(size)
 
     return Promise.all([
       this.model

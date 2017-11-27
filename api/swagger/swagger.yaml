@@ -1,0 +1,36 @@
+swagger: "2.0"
+info: 
+  version: "1.0.0"
+  title: Basedev
+host: localhost:9090
+basePath: /
+schemes: 
+  - http
+consumes: 
+  - application/json
+produces: 
+  - application/json
+paths:
+  /users: 
+    get:
+      description: Get list of users with paginate
+      parameters: 
+        - name: query
+          in: body
+          type: object
+          required: true
+          description: "Query object"
+          
+        - name: size
+          in: body
+          type: integer
+          
+      responses:
+        200:
+          description: Successfully 
+        500: 
+          description: Internal system error
+      
+      
+      
+        
